@@ -98,10 +98,21 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params as { id: string };
+
+  const pokemon = await getPokemonInfo(id);
+  if (!pokemon) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
   return {
     props: {
-      pokemon: await getPokemonInfo(id)
-    }
+      pokemon
+    },
+    revalidate: 86400 // se reconstruyen los archivos cada 86400 segundos /24 horas
   }
 }
 
@@ -123,7 +134,7 @@ export async function getStaticPaths() {
     //     params: { id: '2' }
     //   }
     // ],
-    fallback: false
+    fallback: 'blocking'
   }
 }
 export default PokemonPage;

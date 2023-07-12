@@ -15,7 +15,8 @@ export const NoFavorites = () => {
           src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/122.svg'
           width={250}
           height={250}
-          css={{ opacity: 0.1 }}>
+          css={{ opacity: 0.1 }}
+          alt='no-image'>
 
         </Image>
       </Container>
